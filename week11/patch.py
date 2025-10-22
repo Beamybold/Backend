@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json 
+import json
 
 data = [
     {
@@ -9,14 +9,14 @@ data = [
 ]
 
 class BasicAPI(BaseHTTPRequestHandler):
-    def send_data(self, data, status=201):
+    def send_data(self, data, status = 201):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode())
 
     def do_PATCH(self):
-        content_size = int(self.headers.get('Content-Length',0))
+        content_size = int(self.headers.get("Content-Length", 0))
         parsed_data = self.rfile.read(content_size)
 
         patched_data = json.loads(parsed_data)
@@ -33,7 +33,7 @@ class BasicAPI(BaseHTTPRequestHandler):
             }, status=400)
 
 def run():
-    HTTPServer(('0.0.0.0', 8000), BasicAPI).serve_forever() 
-    
+    HTTPServer(('0.0.0.0', 8000), BasicAPI).serve_forever()
+
 print("Application is running")
 run()

@@ -5,3 +5,6 @@ uvicorn
 dotenv
 pymysql
 SQLAlchemy
+bcrypt
+pyJWT
+alembic
